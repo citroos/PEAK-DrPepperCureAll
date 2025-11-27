@@ -1,5 +1,5 @@
 [config]
-schemaVersion = "0.0.1"
+schemaVersion = "0.0.2"
 
 [general]
 repository = "https://thunderstore.io"
@@ -7,7 +7,7 @@ repository = "https://thunderstore.io"
 [package]
 namespace = "Citroos"
 name = "DrPepperCureAll"
-description = "A basic mod that replaces the Cure-All model with Dr Pepper."
+description = "A basic mod for PEAK that replaces the Cure-All with Dr Pepper."
 websiteUrl = "" # TODO: Add a link to your mod repository here (optional)
 containsNsfwContent = false
 
