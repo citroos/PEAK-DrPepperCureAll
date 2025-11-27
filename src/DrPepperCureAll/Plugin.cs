@@ -1,33 +1,72 @@
-﻿using BepInEx;
+﻿using System.Collections;
+using BepInEx;
+using BepInEx.Configuration;
 using BepInEx.Logging;
+using HarmonyLib;
+using PEAKLib.Core;
+using PEAKLib.Items;
+using UnityEngine;
+using UnityEngine.Audio;
 
 namespace DrPepperCureAll;
 
-// Here are some basic resources on code style and naming conventions to help
-// you in your first CSharp plugin!
-// https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/coding-conventions
-// https://learn.microsoft.com/en-us/dotnet/csharp/fundamentals/coding-style/identifier-names
-// https://learn.microsoft.com/en-us/dotnet/standard/design-guidelines/names-of-namespaces
-
-// This BepInAutoPlugin attribute comes from the Hamunii.BepInEx.AutoPlugin
-// NuGet package, and it will generate the BepInPlugin attribute for you!
-// For more info, see https://github.com/Hamunii/BepInEx.AutoPlugin
 [BepInAutoPlugin]
+[BepInDependency("com.github.PEAKModding.PEAKLib.Core", BepInDependency.DependencyFlags.HardDependency)]
+[BepInDependency("com.github.PEAKModding.PEAKLib.Items", BepInDependency.DependencyFlags.HardDependency)]
 public partial class Plugin : BaseUnityPlugin
 {
     internal static ManualLogSource Log { get; private set; } = null!;
+    internal static ModDefinition definition = null!;
+    internal static AssetBundle drpepperAssetBundle = null!;
+    internal static GameObject drpepperPrefab = null!;
+    internal static Item drpepperItem = null!;
+    private ConfigEntry<bool> configDrPepperShatter = null!;
+
+
+    private class Patcher
+    {
+        // whenever a cure-all is spawned, replace it (for general spawns like statues)
+        [HarmonyPatch(typeof(Item), "Awake")]
+        [HarmonyPostfix]
+        private static void ItemAwakePostfix(Item __instance)
+        {
+            if (__instance.itemID == 24)
+            {
+                Transform itemTransform = __instance.transform;
+                GameObject drpepperInstance = Instantiate(drpepperPrefab);
+                drpepperInstance.transform.SetPositionAndRotation(itemTransform.position, itemTransform.rotation);
+                Destroy(itemTransform);
+            }
+        }
+
+        // whenever a cure-all is grabbed from database, give dr. pepper instead (for manual item spawning)
+        [HarmonyPatch(typeof(ItemDatabase), "TryGetItem")]
+        [HarmonyPostfix]
+        private static void ItemDatabaseTryGetItemPostfix(ushort itemID, ref Item item, ref bool __result)
+        {
+            if (itemID == 24)
+            {
+                item = drpepperItem;
+                __result = true;
+            }
+        }
+    }
 
     private void Awake()
     {
-        // BepInEx gives us a logger which we can use to log information.
-        // See https://lethal.wiki/dev/fundamentals/logging
         Log = Logger;
+        definition = ModDefinition.GetOrCreate(Info.Metadata);
+        Harmony.CreateAndPatchAll(typeof(Patcher));
 
-        // BepInEx also gives us a config file for easy configuration.
-        // See https://lethal.wiki/dev/intermediate/custom-configs
+        configDrPepperShatter = Config.Bind("Toggles", "ShatterToggle", false, "Enables shattering when thrown (like the original Cure-All) if true, disables if false");
 
-        // We can apply our hooks here.
-        // See https://lethal.wiki/dev/fundamentals/patching-code
+        string drpepperAssetBundlePath = System.IO.Path.Combine(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location), "drpeppercureall");
+        drpepperAssetBundle = AssetBundle.LoadFromFile(drpepperAssetBundlePath);
+        drpepperPrefab = drpepperAssetBundle.LoadAsset<GameObject>("DrPepper.prefab");
+        drpepperItem = drpepperPrefab.GetComponent<Item>();
+        
+        LocalizedText.mainTable["NAME_DR. PEPPER"] = ["DR. PEPPER"]; // fixes the localization mumbo jumbo
+        new ItemContent(drpepperItem).Register(definition);
 
         // Log our awake here so we can see it in LogOutput.log file
         Log.LogInfo($"Plugin {Name} is loaded!");

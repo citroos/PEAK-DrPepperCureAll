@@ -26,6 +26,14 @@
     <None Include="$(SolutionRoot)icon.png" Pack="true" PackagePath="/" />
   </ItemGroup>
 
+	<ItemGroup>
+		<PackageReference Include="PEAKModding.PEAKLib.Core" Version="0.1.*" Private="False" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="PEAKModding.PEAKLib.Items" Version="0.1.*" Private="False" />
+	</ItemGroup>
+
   <!--
   How to include thunderstore mods as dependencies via nuget
 
