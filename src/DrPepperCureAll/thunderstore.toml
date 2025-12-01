@@ -6,7 +6,7 @@ repository = "https://thunderstore.io"
 
 [package]
 namespace = "Citroos"
-name = "Dr_Pepper_Cure-All"
+name = "Dr_Pepper_Cure_All"
 description = "Replaces the Cure-All with Dr. Pepper."
 websiteUrl = "https://github.com/citroos/DrPepperCureAll"
 containsNsfwContent = false
@@ -47,4 +47,4 @@ communities = [ "peak", ]
 [publish.categories]
 # See categories at:
 # https://thunderstore.io/api/experimental/community/peak/category/
-peak = [ "mods", "all", "items"]
+peak = [ "mods", "all", "items", ]
