@@ -4,10 +4,6 @@ A mod that replaces the Cure-All with a refreshing can of Dr Pepper. Just take a
 
 <img alt="Dr Pepper in game" src="https://github.com/user-attachments/assets/da596ecb-6065-4c96-be9c-4cb0247e6a60" />
 
-## PLEASE NOTE:
-
-This is a client-side mod, meaning everyone must have the mod installed in order to see the Dr Pepper.
-
 ## Configuration
 
 Since this is a can, it does not shatter when thrown like the regular Cure-All, so the config lets you turn the shatter back on if you want. It kinda just disappears on shatter so I don't really recommend it, but hey, it's your game.
