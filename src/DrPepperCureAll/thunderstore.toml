@@ -1,18 +1,20 @@
 [config]
-schemaVersion = "0.0.2"
+schemaVersion = "1.0.0"
 
 [general]
 repository = "https://thunderstore.io"
 
 [package]
 namespace = "Citroos"
-name = "DrPepperCureAll"
-description = "A basic mod for PEAK that replaces the Cure-All with Dr Pepper."
-websiteUrl = "" # TODO: Add a link to your mod repository here (optional)
+name = "Dr_Pepper_Cure-All"
+description = "Replaces the Cure-All with Dr. Pepper."
+websiteUrl = "https://github.com/citroos/DrPepperCureAll"
 containsNsfwContent = false
 
 [package.dependencies]
 BepInEx-BepInExPack_PEAK = "5.4.2403"
+PEAKModding-PEAKLib_Core = "1.7.0"
+PEAKModding-PEAKLib_Items = "1.6.0"
 
 [build]
 icon = "../../icon.png"
@@ -20,8 +22,12 @@ readme = "../../README.md"
 outdir = "../../artifacts/thunderstore/"
 
 [[build.copy]]
-source = "../../artifacts/bin/DrPepperCureAll/release/com.github.citrusking.DrPepperCureAll.dll"
-target = "plugins/"
+source = "../../artifacts/bin/DrPepperCureAll/release/DrPepperCureAll.dll"
+target = "plugins/DrPepperCureAll/DrPepperCureAll.dll"
+
+[[build.copy]]
+source = "drpepper.peakbundle"
+target = "plugins/DrPepperCureAll/drpepper.peakbundle"
 
 [[build.copy]]
 source = "../../CHANGELOG.md"
@@ -41,4 +47,4 @@ communities = [ "peak", ]
 [publish.categories]
 # See categories at:
 # https://thunderstore.io/api/experimental/community/peak/category/
-peak = [ "mods", ]
+peak = [ "mods", "asset-replacements", "client", "items"]
