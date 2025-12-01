@@ -2,7 +2,7 @@
 
 A mod that replaces the Cure-All with a refreshing can of Dr Pepper. Just take a sip and let the healing energy of those 23 flavors flow through you.
 
-
+<img alt="Dr Pepper in game" src="https://github.com/user-attachments/assets/da596ecb-6065-4c96-be9c-4cb0247e6a60" />
 
 ## PLEASE NOTE:
 
