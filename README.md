@@ -1,31 +1,36 @@
-# DrPepperCureAll
+# Dr Pepper Cure-All
 
-Describe your project here!
+A mod that replaces the Cure-All with a refreshing can of Dr Pepper. Just take a sip and let the healing energy of those 23 flavors flow through you.
 
-## Template Instructions
+<img alt="Dr Pepper in game" src="img/ingame.png"/>
 
-You can remove this section after you've set up your project.
+## PLEASE NOTE:
 
-Next steps:
+This is a client-side mod, meaning everyone must have the mod installed in order to see the Dr Pepper.
 
-- Create a copy of the `Config.Build.user.props.template` file and name it `Config.Build.user.props`
-  - This will automate copying your plugin assembly to `BepInEx/plugins/`
-  - Configure the paths to point to your game path and your `BepInEx/plugins/`
-  - Game assembly references should work if the path to the game is valid
-- Search `TODO` in the whole project to see what you should configure or modify
+## Configuration
 
-### Thunderstore Packaging
+Since this is a can, it does not shatter when thrown like the regular Cure-All, so the config lets you turn the shatter back on if you want. It kinda just disappears on shatter so I don't really recommend it, but hey, it's your game.
 
-This template comes with Thunderstore packaging built-in, using [TCLI](<https://github.com/thunderstore-io/thunderstore-cli>).
+After running the mod at least once, configuration can be found at:<br>[steam directory]\PEAK\BepInEx\config\DrPepperCureAll.cfg
+(or in your mod manager's BepInEx directory)
 
-You can build Thunderstore packages by running:
+## Manual Installation
 
-```sh
-dotnet build -c Release -target:PackTS -v d
-```
+1. Download the latest version of [BepInEx](https://github.com/BepInEx/BepInEx/releases)
+2. Extract the zip into your game directory, which should be at: C:\Program Files (x86)\Steam\steamapps\common\PEAK
+3. Start the game once for first-time BepInEx setup
+4. Place this mod's folder (containing DrPepperCureAll.dll) into the BepInEx\plugins directory
+5. Done!
 
-> [!NOTE]  
-> You can learn about different build options with `dotnet build --help`.  
-> `-c` is short for `--configuration` and `-v d` is `--verbosity detailed`.
+## Check Out My Other Mod
 
-The built package will be found at `artifacts/thunderstore/`.
+- [Random Jumpscares](https://thunderstore.io/c/peak/p/Citroos/Random_Jumpscares/) - Adds a small chance per second to get jumpscared!
+
+## Credit
+
+- Can model by [L0LIC0N on Sketchfab](<https://steamcommunity.com/sharedfiles/filedetails/?id=3481943642>)
+
+## Contact Me
+
+If you want to suggest anything or send me cat photos, you can [contact me on Discord](https://discord.com/users/443121651924598784)
